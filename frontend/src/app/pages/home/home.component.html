@@ -1,0 +1,54 @@
+<main class="container pt-5">
+
+  <div class="card mb-5">
+    <div class="card-header">
+      <h1 class="float-left">Listagem de usuarios</h1>
+      <div class="btn float-right" aria-label="Basic example">
+        <button type="button" class="logout" (click)="logout()">Logout</button>
+      </div>
+    </div>
+    <div class="card-block p-0">
+      <table class="table table-bordered table-sm m-0">
+        <thead>
+          <tr class="text-center">
+            <th>ID</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Imagem</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users" class="text-center" appDestaque>
+            <td> {{ user.id }} </td>
+            <td> {{ user.first_name }} </td>
+            <td> {{ user.email }} </td>
+            <td><img width="52" src="{{ user.avatar }}"></td>
+            <td class="col-md-3">
+              <div class="btn-group mr-2" role="group" aria-label="First group">
+                <button type="button" class="btn btn-success btn-rounded" (click)="openModal(user.id,'Detalhes','Ver')">Detalhes</button>
+                <button type="button" class="btn btn-warning btn-rounded" (click)="openModal(user.id,'Editar','Salvar')">Editar</button>
+                <button type="button" class="btn btn-danger btn-rounded" (click)="openModal(user.id,'Deletar','Remover')">Deletar</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-end">
+            <li class="page-item">
+              <a class="page-link" (click)="listUsers(page-1)">Anterior</a>
+            </li>
+            <ng-container *ngFor="let pagination of paginations">
+              <li [ngClass]="{'page-item active': pagination.id == page}" class="page-item">
+                <a class="page-link" (click)="listUsers(pagination.id)">{{ pagination.id }}</a>
+              </li>
+            </ng-container>
+            <li class="page-item">
+              <a class="page-link" (click)="listUsers(page+1)">Proximo</a>
+            </li>
+          </ul>
+      </nav>
+    </div>
+  </div>
+</main>

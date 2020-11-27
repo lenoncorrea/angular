@@ -1,0 +1,65 @@
+<h2></h2>
+<div class="container left-panel-active" id="container">
+  <div class="form-container sign-in-container">
+    <form [formGroup]="formLogin">
+      <h1>Login</h1>
+      <div class="social-container">
+        <img src="" />
+      </div>
+      <!-- VALID EMAIL -->
+      <input
+        [class.is-invalid]="
+          formLogin.get('email').invalid && formLogin.get('email').touched
+        "
+        formControlName="email"
+        class="text-center"
+        type="email"
+        placeholder="E-mail"
+        name="email"
+        id="email"
+      />
+      <div *ngIf="(email.invalid && email.touched) || email.dirty">
+        <h5 *ngIf="email.errors?.required" class="text-danger">
+          Insira o e-mail padrão para prossegir
+        </h5>
+        <small *ngIf="email.errors?.pattern" class="text-danger"
+          >Insira o e-mail padrão para prossegir</small
+        >
+      </div>
+      <!-- VALID PASSWORD -->
+      <input
+        [class.is-invalid]="
+          formLogin.get('password').invalid && formLogin.get('password').touched
+        "
+        formControlName="password"
+        class="text-center"
+        type="password"
+        placeholder="Senha"
+        name="password"
+        id="password"
+      />
+      <div *ngIf="(password.invalid && password.touched) || password.dirty">
+        <small *ngIf="password.errors?.required" class="text-danger"
+          >Insira a senha padrão para prosseguir</small
+        >
+        <small *ngIf="password.errors?.pattern" class="text-danger"
+          >Insira a senha padrão para prosseguir</small
+        >
+      </div>
+      <button [disabled]="!formLogin.valid" (click)="loginUser(formLogin)">
+        Login
+      </button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-right">
+        <h1>Faça login e aproveite!</h1>
+        <h3></h3>
+        <h2>Se ainda não for cadastradado, não perca tempo!</h2>
+        <h3>Clique no botão abaixo e realize seu cadastro.</h3>
+        <button class="cadastro" routerLink="/register">Cadastrar-me</button>
+      </div>
+    </div>
+  </div>
+</div>
